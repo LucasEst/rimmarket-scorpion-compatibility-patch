@@ -1,5 +1,26 @@
-RimMarket - Scorpion Stall Block
-===============================
+RimMarket - Scorpion Compatibility Patch
+=======================================
+
+HOW TO INSTALL (GITHUB DOWNLOAD)
+1. Open https://github.com/LucasEst/rimmarket-scorpion-compatibility-patch
+   and click Code -> Download ZIP.
+2. Extract the downloaded ZIP into your RimWorld/Mods folder.
+3. Make sure the folder structure is:
+   RimWorld/Mods/rimmarket-scorpion-compatibility-patch-main/About/About.xml
+   If there is another folder between the mod folder and About, move the
+   inner mod folder directly into Mods.
+4. Before enabling the patch, remove any Scorpions already stored in market
+   stalls and cancel their sale orders. Existing stock is not moved by the patch.
+5. Open RimWorld's Mods menu and enable the patch AFTER these required mods:
+   - Harmony
+   - RimMarket
+   - Vanilla Factions Expanded - Classical
+6. Restart RimWorld, load your save and check that Scorpions can no longer
+   be stocked in colony stalls. Retry the art bench interaction that failed.
+
+No compilation is needed: the download includes DLLs for RimWorld 1.6 and 1.7.
+The patch prevents Scorpions from being stocked in colony stalls. You can still
+use them as weapons and turrets. Gameplay testing in the affected save is pending.
 
 FRANCAIS
 Petit contournement pour RimMarket + Vanilla Factions Expanded - Classical.
