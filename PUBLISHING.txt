@@ -1,0 +1,25 @@
+WORKSHOP PUBLISHING - VERSION 1.0.0
+
+This mod folder is prepared for uploading through RimWorld's Workshop
+publishing interface. It has not been published automatically.
+
+1. First test in the save that reproduces the error: remove Scorpions from
+   stalls, cancel their sale orders, enable the patch and restart the game.
+   Check the art bench's right-click menu and confirm that a Scorpion cannot
+   be restocked. Also check that an ordinary item can still be sold.
+2. Optionally replace the author field in About/About.xml with your username.
+3. Publish the patch folder as a local mod from the game.
+   About/Preview.png supplies the thumbnail; WORKSHOP_DESCRIPTION.txt contains
+   the English description to copy onto the Workshop page.
+4. Add these three required items to the Steam Workshop page:
+   Harmony: https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077
+   RimMarket: https://steamcommunity.com/sharedfiles/filedetails/?id=3817820660
+   VFE Classical: https://steamcommunity.com/sharedfiles/filedetails/?id=2787850474
+5. Keep the testing limitations in the initial description. After testing
+   in the affected save, update that section with the actual results.
+
+Do not reuse another mod's PublishedFileId. Steam will assign one during the
+first publication. Keep the ID assigned to THIS patch for future updates.
+
+Original RimWorld, RimMarket, VFE Classical and Harmony DLLs are not included.
+Only the patch's own code is distributed, under the MIT license.
