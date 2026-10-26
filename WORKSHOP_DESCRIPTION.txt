@@ -1,0 +1,34 @@
+RimMarket - Scorpion Compatibility Patch
+
+[h2]What this does[/h2]
+Prevents the Scorpion from Vanilla Factions Expanded - Classical from being selected or accepted as stock in RimMarket colony stalls. The weapon and turret remain usable normally outside stalls.
+
+This is a narrow workaround for a reported error when a Scorpion is stored in a colony stall and a pawn searches for bill ingredients. The report showed an IndexOutOfRangeException in GetEdifice, reached through CanReserve while checking DoBillsSculpt.
+
+[h2]Before enabling[/h2]
+Remove every Scorpion already stored in a market stall and cancel its sale order. This patch does not automatically eject existing stock.
+
+[h2]Requirements and load order[/h2]
+[list]
+[*]Harmony
+[*]RimMarket
+[*]Vanilla Factions Expanded - Classical
+[*]This patch
+[/list]
+
+[h2]Scope[/h2]
+Blocks VFEC_Weapon_Scorpion and VFEC_Turret_Scorpion in colony-stall sale selection, acceptance and storage-capacity checks. Also detects a minified object containing the turret.
+
+Adds no new game objects, recipes or factions. Does not delete Scorpions or alter their combat behaviour. Does not modify global reservation rules. Other stored items are unaffected by the guards.
+
+[h2]Versions and testing[/h2]
+Includes builds for RimWorld 1.6 and 1.7.
+Both builds compile without warnings. Required RimMarket target signatures were checked for both versions; the four Harmony hooks and blocked results were exercised against the inspected 1.7 RimMarket assembly.
+
+Gameplay reproduction in the affected save is still pending. If the error persists, include your RimWorld version, RimMarket version and a full log when reporting it. Other causes of bill-search errors are outside this patch's scope.
+
+[h2]Removal[/h2]
+Disable this patch and restart the game. Its restriction on stocking Scorpions will no longer apply.
+
+[h2]Credits[/h2]
+RimMarket by BenFD; Vanilla Factions Expanded - Classical by its original authors; Harmony by Andreas Pardeike and contributors. This is an unofficial community compatibility patch. No original mod assets or assemblies are included.

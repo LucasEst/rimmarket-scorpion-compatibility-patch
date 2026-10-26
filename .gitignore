@@ -1,0 +1,10 @@
+# Build intermediates and editor files. Keep the compiled game-version DLLs.
+**/obj/
+**/bin/
+.vs/
+.idea/
+*.user
+*.suo
+
+# Steam assigns this to each published Workshop item.
+About/PublishedFileId.txt

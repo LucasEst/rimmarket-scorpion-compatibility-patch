@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>RimMarket - Scorpion Compatibility Patch</name>
+  <author>Community compatibility patch</author>
+  <modVersion>1.0.0</modVersion>
+  <packageId>local.rimmarket.scorpionstallblock</packageId>
+  <supportedVersions><li>1.6</li><li>1.7</li></supportedVersions>
+  <description>Prevents the Vanilla Factions Expanded - Classical Scorpion from being selected or accepted as stock in RimMarket colony stalls.
+
+This is a targeted workaround for the reported ingredient-search/reservation exception involving a Scorpion stored in a market stall. The weapon and turret remain available for normal use.
+
+Before enabling: remove all Scorpions already stored in stalls and cancel their sale orders. Existing stock is not automatically moved.
+
+Load after Harmony, RimMarket and Vanilla Factions Expanded - Classical.
+
+Includes RimWorld 1.6 and 1.7 builds. Compiled and checked against RimMarket assemblies; gameplay reproduction in the affected save is still pending. Unofficial community patch.</description>
+  <modDependencies>
+    <li><packageId>brrainz.harmony</packageId><displayName>Harmony</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl></li>
+    <li><packageId>forti.rimmarket</packageId><displayName>RimMarket</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/3817820660</steamWorkshopUrl></li>
+    <li><packageId>OskarPotocki.VFE.Classical</packageId><displayName>Vanilla Factions Expanded - Classical</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/2787850474</steamWorkshopUrl></li>
+  </modDependencies>
+  <loadAfter><li>brrainz.harmony</li><li>forti.rimmarket</li><li>OskarPotocki.VFE.Classical</li></loadAfter>
+</ModMetaData>

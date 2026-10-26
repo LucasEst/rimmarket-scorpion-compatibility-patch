@@ -1,0 +1,67 @@
+SCORPION / RIMMARKET - CODE FINDINGS (2026-10-26)
+================================================
+
+1. VFE Classical: the item is actually a MinifiedThing subclass.
+
+Source revision: e87afb54d6eff2de4620179d07b7bda2a7180c7b
+https://github.com/Vanilla-Expanded/VanillaFactionsExpanded-Classical/blob/e87afb54d6eff2de4620179d07b7bda2a7180c7b/1.6/Source/VFEC/VFEC/Buildings/Scorpion.cs
+
+The class declaration is:
+    public class Scorpion : MinifiedThing, IEquipGizmos
+PostMake/SpawnSetup/Notify_Equipped ensure its InnerThing is VFEC_Turret_Scorpion.
+
+The weapon XML assigns VFEC.Buildings.Scorpion as its thingClass:
+https://github.com/Vanilla-Expanded/VanillaFactionsExpanded-Classical/blob/e87afb54d6eff2de4620179d07b7bda2a7180c7b/1.6/Defs/ThingDefs_Misc/Weapons/RangedNeolithic.xml#L98-L105
+
+2. RimMarket: exact-type exclusion misses subclasses.
+
+Source revision: 225b6cd995df70ed67030d6906793e30db09b6f0
+https://github.com/benjaminfortierdurand/RimMarket/blob/225b6cd995df70ed67030d6906793e30db09b6f0/Source/Market/ColonyStalls.cs#L71-L76
+
+Line 75:
+    if (def.IsCorpse || def.thingClass == typeof(MinifiedThing)) return false;
+
+Equality only excludes MinifiedThing itself, not VFEC.Buildings.Scorpion.
+Suggested general hardening of this check:
+    if (def.IsCorpse || (def.thingClass != null &&
+        typeof(MinifiedThing).IsAssignableFrom(def.thingClass))) return false;
+
+IMPORTANT: this is a confirmed filter weakness, not proof by itself of the
+entire admission path in the reporter's installed version. Current StockDef
+(line 67) unwraps MinifiedThing to the inner building definition; the current
+UI passes StockDef to CanSell, which should already reject a non-art turret.
+Thus the installed RimMarket version and other patches still matter.
+Do not claim that line 75 alone explains every step of the reported case.
+
+3. Why sculpture and why a STEEL-only bill still triggers the crash.
+
+Inspected local RimWorld 1.7 Assembly-CSharp.dll using ILSpy.
+RimWorld.WorkGiver_DoBill.TryFindBestIngredientsHelper:
+- Iterates pawn.Map.haulDestinationManager.AllHaulSourcesListForReading.
+- Calls ThingOwnerUtility.GetAllThingsRecursively(item, newRelevantThings).
+- This call defaults allowUnreal to true, including contents of MinifiedThing.
+- The reservation check pawn.CanReserve(newRelevantThing) is BEFORE
+  thingValidator(newRelevantThing) in the condition.
+
+RimMarket.Buildings.Building_MarketStall implements IHaulSource/IThingHolder:
+https://github.com/benjaminfortierdurand/RimMarket/blob/225b6cd995df70ed67030d6906793e30db09b6f0/Source/Buildings/Building_MarketStall.cs#L57
+GetChildHolders exposes nested holders, including the Scorpion wrapper:
+https://github.com/benjaminfortierdurand/RimMarket/blob/225b6cd995df70ed67030d6906793e30db09b6f0/Source/Buildings/Building_MarketStall.cs#L241-L246
+
+Verse.AI.ReservationManager.CanReserve handles a Building with an interaction
+cell by computing building.InteractionCell and then calling:
+    interactionCell.GetEdifice(claimant.Map)
+The internal Scorpion turret is not spawned on the map; an invalid cell here
+matches the provided GetEdifice IndexOutOfRangeException stack trace.
+
+This is a strongly supported explanation from code + the reported item-removal
+test, not a reproduced gameplay trace from the friend's save. The local game
+inspection is 1.7; the friend's exact executable/version is unknown.
+
+4. Workaround scope.
+
+The included patch blocks both VFEC_Weapon_Scorpion and VFEC_Turret_Scorpion
+at RimMarket CanSell, Building_MarketStall.Accepts, RoomFor and
+StallStock.GetCountCanAccept. It also detects a MinifiedThing wrapping a turret.
+Existing stock must be removed manually. No global reservation exceptions
+are swallowed and no game definitions are deleted.

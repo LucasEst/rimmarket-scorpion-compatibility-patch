@@ -1,0 +1,26 @@
+PUBLICATION WORKSHOP - VERSION 1.0.0
+
+Le dossier de ce mod est pret pour l'envoi depuis l'interface de publication
+Workshop de RimWorld. Il n'a pas ete publie automatiquement.
+
+1. Tester d'abord sur la sauvegarde qui reproduit le bug : vider les Scorpions
+   des etals, annuler leurs commandes de vente, activer le patch et redemarrer.
+   Verifier le clic droit sur l'etabli d'art et l'impossibilite de restocker
+   un Scorpion. Verifier aussi la vente d'un objet ordinaire.
+2. Facultatif : remplacer le champ author dans About/About.xml par ton pseudo.
+3. Publier le dossier Scorpion_MarketStall_Block comme mod local depuis le jeu.
+   About/Preview.png fournit la miniature et WORKSHOP_DESCRIPTION.txt le texte
+   anglais a copier sur la page Workshop.
+4. Ajouter les trois elements requis sur la page Steam :
+   Harmony : https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077
+   RimMarket : https://steamcommunity.com/sharedfiles/filedetails/?id=3817820660
+   VFE Classical : https://steamcommunity.com/sharedfiles/filedetails/?id=2787850474
+5. Pour une premiere publication, conserver la mention des limites de test.
+   Apres le test reel, mettre a jour la section testing avec le resultat exact.
+
+Ne pas reutiliser le PublishedFileId d'un autre mod. Il sera cree par Steam
+lors de la premiere publication. Pour une mise a jour, conserver ensuite l'ID
+attribue a CE patch.
+
+Les DLL d'origine de RimWorld, RimMarket, VFE Classical et Harmony ne sont
+pas incluses. Seul le code du correctif est fourni, sous licence MIT.
